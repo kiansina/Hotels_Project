@@ -9,6 +9,7 @@ from docx.enum.table import WD_ROW_HEIGHT_RULE
 import matplotlib.pyplot as plt
 import math
 from matplotlib.figure import Figure
+import numpy as np
 
 df=pd.read_excel(r"*****")
 df.columns=df.loc[5]
