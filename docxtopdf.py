@@ -16,3 +16,5 @@ for f in files_docx:
     doc.Close()
     print(n)
     n+=1
+
+word.quit()
