@@ -34,22 +34,63 @@ LOW=dfs[dfs['Earthquake Zone']==0]
 LOW.sort_values(by=['Terremoto, Inondazione, Alluvione, Allagamento'], inplace=True)
 MEDIUM=dfs[dfs['Earthquake Zone']==1]
 MEDIUM.sort_values(by=['Terremoto, Inondazione, Alluvione, Allagamento'], inplace=True)
+HIGH=dfs[dfs['Earthquake Zone']==2]
+HIGH.sort_values(by=['Terremoto, Inondazione, Alluvione, Allagamento'], inplace=True)
+Extream=dfs[dfs['Earthquake Zone']==3]
+Extream.sort_values(by=['Terremoto, Inondazione, Alluvione, Allagamento'], inplace=True)
+Disasterous=dfs[dfs['Earthquake Zone']==4]
+Disasterous.sort_values(by=['Terremoto, Inondazione, Alluvione, Allagamento'], inplace=True)
+
 app.layout = html.Div([
     html.Div([  # this Div contains our scatter plot
     dcc.Graph(
         id='mpg_scatter',
         figure={
             'data': [go.Scattergeo(
-                                lon = MEDIUM.Longitude,
-                                lat = MEDIUM.Latitude,
-                                text = MEDIUM['Codice_Unico'],
+                                lon = LOW.Longitude,
+                                lat = LOW.Latitude,
+                                text = LOW['Codice_Unico'],
                                 marker_color='green',
-                                marker_size=8
-            )],
+                                name='0',
+                                marker_size=8,
+                                              ),
+                    go.Scattergeo(
+                                        lon = MEDIUM.Longitude,
+                                        lat = MEDIUM.Latitude,
+                                        text = MEDIUM['Codice_Unico'],
+                                        marker_color='yellow',
+                                        name='1',
+                                        marker_size=8,
+                                                      ),
+                  go.Scattergeo(
+                                      lon = HIGH.Longitude,
+                                      lat = HIGH.Latitude,
+                                      text = HIGH['Codice_Unico'],
+                                      marker_color='Orange',
+                                      name='2',
+                                      marker_size=8,
+                                                    ),
+                 go.Scattergeo(
+                                     lon = Extream.Longitude,
+                                     lat = Extream.Latitude,
+                                     text = Extream['Codice_Unico'],
+                                     marker_color='red',
+                                     name='3',
+                                     marker_size=8,
+                                                   ),
+                go.Scattergeo(
+                                    lon = Disasterous.Longitude,
+                                    lat = Disasterous.Latitude,
+                                    text = Disasterous['Codice_Unico'],
+                                    marker_color='brown',
+                                    name='4',
+                                    marker_size=8,
+                                                  ),
+            ],
             'layout': go.Layout(
-                title = 'Medium Earthquake zones',
+                title = 'Best Western Hotels',
+                legend={"title":"Earthquake Zones"},
                 hovermode='closest',
-                showlegend = False,
                 plot_bgcolor='black',
                 height=1000,
                 width=1000,
@@ -106,4 +147,4 @@ def callback_graph(hoverData):
 
 
 
-app.run_server(debug=True, use_reloader=False)
+app.run_server(debug=False, use_reloader=False)
